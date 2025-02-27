@@ -1,0 +1,186 @@
+.flower-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .time-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: monospace;
+  }
+  
+  .flower-container {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .flower {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .stem {
+    width: 6px;
+    height: 0%;
+    background-color: #4caf50;
+    position: absolute;
+    bottom: 0;
+    transition: height 0.5s ease;
+  }
+  
+  .leaf {
+    width: 30px;
+    height: 15px;
+    background-color: #4caf50;
+    position: absolute;
+    border-radius: 50% 50% 50% 50% / 0% 100% 0% 100%;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .leaf-left {
+    left: -20px;
+    bottom: 60%;
+    transform: rotate(-30deg);
+  }
+  
+  .leaf-right {
+    right: -20px;
+    bottom: 40%;
+    transform: rotate(30deg);
+  }
+  
+  .bud {
+    width: 20px;
+    height: 20px;
+    background-color: #8bc34a;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 80%;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .petals {
+    position: absolute;
+    bottom: 80%;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .petal {
+    width: 20px;
+    height: 20px;
+    background-color: #f48fb1;
+    position: absolute;
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  }
+  
+  .petal-1 {
+    top: -15px;
+    left: 10px;
+  }
+  
+  .petal-2 {
+    top: 0px;
+    right: -10px;
+  }
+  
+  .petal-3 {
+    bottom: 0px;
+    right: -10px;
+  }
+  
+  .petal-4 {
+    bottom: -15px;
+    left: 10px;
+  }
+  
+  .petal-5 {
+    bottom: 0px;
+    left: -10px;
+  }
+  
+  .petal-6 {
+    top: 0px;
+    left: -10px;
+  }
+  
+  .progress-text {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Flower stages */
+  .flower.seed .stem {
+    height: 10%;
+  }
+  
+  .flower.sprout .stem {
+    height: 40%;
+  }
+  
+  .flower.bud .stem {
+    height: 70%;
+  }
+  
+  .flower.bloom .stem, 
+  .flower.bloomed .stem {
+    height: 80%;
+  }
+  
+  .flower.bloomed .petals {
+    transform: scale(1.2);
+  }
+  
+  /* Break time animation */
+  .flower.break-time .petals {
+    animation: flower-dance 3s infinite alternate;
+  }
+  
+  @keyframes flower-dance {
+    0% {
+      transform: rotate(-5deg) scale(1.2);
+    }
+    50% {
+      transform: rotate(5deg) scale(1.25);
+    }
+    100% {
+      transform: rotate(-5deg) scale(1.2);
+    }
+  }
+  
+  .break-time .petal {
+    animation: petal-color 5s infinite alternate;
+  }
+  
+  @keyframes petal-color {
+    0% {
+      background-color: #f48fb1;
+    }
+    25% {
+      background-color: #90caf9;
+    }
+    50% {
+      background-color: #a5d6a7;
+    }
+    75% {
+      background-color: #ffe082;
+    }
+    100% {
+      background-color: #f48fb1;
+    }
+  }
