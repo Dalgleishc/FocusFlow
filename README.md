@@ -136,17 +136,6 @@ When running the application in development mode, you need to have both the fron
    python app.py
    ```
 
-### Building for Production
-
-To create a production build of the frontend:
-
-```bash
-cd frontend
-npm run build
-```
-
-This will create optimized files in the `frontend/build` directory that can be served by any static file server.
-
 ## Troubleshooting
 
 ### Common Issues
@@ -174,9 +163,6 @@ This project is part of a university assignment. Contributions should follow the
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## License
-
-This project is licensed for academic purposes only. All rights reserved.
 
 ## Acknowledgments
 
