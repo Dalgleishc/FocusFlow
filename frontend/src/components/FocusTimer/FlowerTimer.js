@@ -10,8 +10,13 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
   useEffect(() => {
     // Reset timer when duration changes
     setTimeRemaining(duration * 60);
-    setProgress(0);
-  }, [duration]);
+    if (!isBreak) {
+      setProgress(0);
+    } else {
+      // Show full flower on break
+      setProgress(100);
+    }
+  }, [duration, isBreak]);
 
   useEffect(() => {
     if (isRunning) {
@@ -25,11 +30,14 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
           return prev - 1;
         });
         
-        // Update progress percentage
-        setProgress(prev => {
+        // Update progress percentage, only on focus mode
+        if (!isBreak) {
+          setProgress(prev => {
           const newProgress = 100 - ((timeRemaining - 1) / totalTime * 100);
           return Math.min(newProgress, 100); // Ensure we don't exceed 100%
         });
+        }
+        
       }, 1000);
     } else {
       // Clear the interval when the timer is paused
@@ -44,7 +52,7 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
         clearInterval(timerRef.current);
       }
     };
-  }, [isRunning, timeRemaining, totalTime, onComplete]);
+  }, [isRunning, timeRemaining, totalTime, onComplete, isBreak]);
 
   // Format time as MM:SS
   const formatTime = (seconds) => {
@@ -64,7 +72,7 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
     } else if (progress < 50) {
       return 'sprout';
     } else if (progress < 75) {
-      return 'bud';
+      return 'bud_stage';
     } else if (progress < 100) {
       return 'bloom';
     } else {
@@ -83,19 +91,20 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
           {/* Flower Stem */}
           <div className="stem" style={{ height: `${Math.min(80, progress * 0.8)}%` }}></div>
           
-          {/* Leaves - only appear after 30% progress */}
-          {progress > 30 && (
-            <>
-              <div className="leaf leaf-left"></div>
-              <div className="leaf leaf-right"></div>
-            </>
-          )}
+          {/* Leaves - only appear after 25% progress */}
+          {progress > 25 && <div className="leaf left" style={{transform: `rotate(${progress % 15}deg)`}}></div>}
+          {progress > 40 && <div className="leaf right" style={{transform: `rotate(-${progress % 15}deg)`}}></div>}
+          {progress > 55 && <div className="leaf left" style={{bottom: '40%', 
+                                                              transform: `rotate(${progress % 15}deg)`}}></div>}
+          {progress > 70 && <div className="leaf right" style={{bottom: '48%',
+                                                              transform: `rotate(-${progress % 15}deg)`}}></div>}
           
           {/* Flower Bud - starts appearing at 50% progress */}
           {progress > 50 && (
             <div className="bud" style={{ 
               transform: `scale(${Math.min(1, (progress - 50) / 50)})`,
-              opacity: Math.min(1, (progress - 50) / 30)
+              opacity: Math.min(1, (progress - 50) / 30),
+              bottom: `${Math.min(80, progress * 0.8) - 5}%`
             }}></div>
           )}
           
@@ -103,7 +112,8 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
           {progress > 75 && (
             <div className="petals" style={{ 
               transform: `scale(${Math.min(1, (progress - 75) / 25)})`,
-              opacity: Math.min(1, (progress - 75) / 25)
+              opacity: Math.min(1, (progress - 75) / 25),
+              bottom: `${Math.min(80, progress * 0.8) - 8}%`
             }}>
               <div className="petal petal-1"></div>
               <div className="petal petal-2"></div>

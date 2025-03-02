@@ -50,15 +50,15 @@
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
   
-  .leaf-left {
-    left: -20px;
-    bottom: 60%;
+  .leaf.left {
+    left: 72px;
+    bottom: 14%;
     transform: rotate(-30deg);
   }
   
-  .leaf-right {
-    right: -20px;
-    bottom: 40%;
+  .leaf.right {
+    right: 72px;
+    bottom: 23%;
     transform: rotate(30deg);
   }
   
@@ -68,13 +68,13 @@
     background-color: #8bc34a;
     border-radius: 50%;
     position: absolute;
-    bottom: 80%;
+    /* bottom: 80%; */
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
   
   .petals {
     position: absolute;
-    bottom: 80%;
+    /* bottom: 80%; */
     width: 40px;
     height: 40px;
     transition: transform 0.5s ease, opacity 0.5s ease;
@@ -125,7 +125,7 @@
   }
   
   /* Flower stages */
-  .flower.seed .stem {
+  /* .flower.seed .stem {
     height: 10%;
   }
   
@@ -135,7 +135,7 @@
   
   .flower.bud .stem {
     height: 70%;
-  }
+  } */
   
   .flower.bloom .stem, 
   .flower.bloomed .stem {
