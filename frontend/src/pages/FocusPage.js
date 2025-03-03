@@ -225,6 +225,25 @@ const FocusPage = ({ selectedDate, onBack }) => {
           </div>
         )}
       </div>
+      /* fixing this v soon */
+      <button 
+        className="seed-button"
+        onClick={() => handleTaskComplete(currentTask.taskId, currentTask.subTaskId)}
+      >
+        <img src="/seedbag.png">
+        </img>
+        <div className="petals" style={{ 
+            transform: `scale(.25)`
+          }}>
+          <div className="petal petal-1"></div>
+          <div className="petal petal-2"></div>
+          <div className="petal petal-3"></div>
+          <div className="petal petal-4"></div>
+          <div className="petal petal-5"></div>
+          <div className="petal petal-6"></div>
+          <div className="petal petal-center"></div>
+        </div>
+      </button>
     </div>
   );
 };

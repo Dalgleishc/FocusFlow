@@ -117,6 +117,12 @@
     top: 0px;
     left: -10px;
   }
+  .petal-center{
+    top: 10px;
+    left: 10px;
+    background-color: #ffe082;
+  }
+
   
   .progress-text {
     margin-top: 20px;

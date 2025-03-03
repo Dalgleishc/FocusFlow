@@ -124,3 +124,28 @@
     margin: 0;
     font-size: 14px;
   }
+
+  .seed-button {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #481fce;
+    border-radius: 50%;
+  }
+  .seed-button:hover{
+    background-color: #ddd;
+  }
+  .seed-button img{
+    width: 200px;
+    position:absolute;
+    bottom: -50px;
+    right: -55px;
+  }
+
