@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Tabs.css';
 
-const ProductivityTab = ({ tasks, completedTasks, onStartTask }) => {
+const ProductivityTab = ({ allTasks, completedTasks, onStartTask }) => {
   const [showCompleted, setShowCompleted] = useState(false);
+  // only want today's (active) tasks
+  const tasks = allTasks.filter((t) => {return t.active});
   
   // Calculate total focused time in minutes
   const calculateTotalFocusTime = () => {

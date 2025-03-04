@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Calendar.css';
 
-const Calendar = ({ onDaySelect }) => {
+const Calendar = ({ onDaySelect, tasks, setTasks, rootTasks, setRootTasks }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [tasks, setTasks] = useState({});
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [newTask, setNewTask] = useState({
     title: '',
@@ -71,13 +70,19 @@ const Calendar = ({ onDaySelect }) => {
   const handleTaskSubmit = () => {
     if (!selectedDate || !newTask.title) return;
     
-    const dateKey = selectedDate.toISOString().split('T')[0];
-    
+    // const dateKey = selectedDate.toISOString().split('T')[0];
+
     // Add the new task to the tasks state
+    const dateKey = selectedDate.toISOString().split('T')[0];
+    const durationCalc = (time1, time2) => Math.abs((new Date('1970-01-01T' + time1 + 'Z') - new Date('1970-01-01T' + time2 + 'Z')) / 60000);
+    const duration = durationCalc(newTask.endTime, newTask.startTime);
+    
     setTasks(prevTasks => ({
       ...prevTasks,
       [dateKey]: [...(prevTasks[dateKey] || []), { ...newTask, id: Date.now() }]
     }));
+    setRootTasks([...rootTasks, {...newTask, id: Date.now(), duration: duration, 
+      date: selectedDate, active: false, subTasks: []}]);
     
     // Reset the new task form
     setNewTask({
