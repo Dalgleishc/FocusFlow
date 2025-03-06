@@ -149,3 +149,165 @@
     right: -55px;
   }
 
+  .store-menu {
+    visibility:hidden;
+    background-color: rgb(176, 24, 24);
+    width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: .5%;
+    padding-right: .5%;
+    bottom: 15%;
+    right: 30%;
+    text-align: center;
+    position: absolute;
+    
+    box-shadow: 10px 10px 5px #333;
+    border-radius: 10%;
+    
+  }
+  .store-menu h1{
+    color: #1b1a1a;
+    display: flex;
+    text-align: center;
+    align-self: center;
+  }
+
+  .colors{
+    align-self: stretch;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 16%;
+    width: 100%;
+    align-items: center;
+  }
+
+  .col-sel-1 {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  .col-sel-2 {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+
+  .col-sel-3 {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: black;
+    border-radius: 50%;
+  }
+
+  .col-sel-4 {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: blue;
+    border-radius: 50%;
+  }
+
+  .col-sel-5 {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: pink;
+    border-radius: 50%;
+  }
+
+  .col-sel-6 {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: purple;
+    border-radius: 50%;
+  }
+
+  .col-sel-1:hover {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  .col-sel-2:hover {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  .col-sel-3:hover {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  .col-sel-4:hover {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  .col-sel-5:hover {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  .col-sel-6:hover {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+
+  .store-menu.active {
+    visibility:visible;
+    background-color: rgb(219, 219, 228);
+  }

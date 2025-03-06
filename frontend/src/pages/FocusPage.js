@@ -7,12 +7,22 @@ import FlowerTimer from '../components/FocusTimer/FlowerTimer';
 
 const FocusPage = ({ selectedDate, onBack }) => {
   const [activeTab, setActiveTab] = useState('scheduling');
+  const [storeMenu, changeMenu] = useState(false);
+  const[col, changeColor] = useState('#ce1fab')
   const [currentTask, setCurrentTask] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [isOnBreak, setIsOnBreak] = useState(false);
 
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--petal-color', col);
+  }, [col]); 
+
+  const handleColorChange = (ncol) => {
+    changeColor(ncol);  
+  };
   // Simulating fetching user's tasks for the selected date
   useEffect(() => {
     // In a real app, this would be an API call
@@ -41,6 +51,14 @@ const FocusPage = ({ selectedDate, onBack }) => {
           subTasks: []
         }
       ];
+
+      const changeColor = (col) => {
+        const petals = document.querySelectorAll(".petal");   
+        console.debug(col);
+        petals.forEach(petal => {
+          petal.style.backgroundColor = col;
+        });
+      };
       
       // Split tasks into 25-minute chunks (a simple implementation of the task splitter)
       const processedTasks = mockTasks.map(task => {
@@ -79,7 +97,6 @@ const FocusPage = ({ selectedDate, onBack }) => {
     
     fetchUserTasks();
   }, [selectedDate]);
-
   const handleTaskComplete = (taskId, subTaskId) => {
     // Mark subtask as completed
     setTasks(prevTasks => 
@@ -119,7 +136,6 @@ const FocusPage = ({ selectedDate, onBack }) => {
       setCurrentTask(null);
     }, 5000); // Using 5 seconds for demo purposes
   };
-
   const startTask = (taskId, subTaskId) => {
     // Find the task and subtask
     const task = tasks.find(t => t.id === taskId);
@@ -187,7 +203,31 @@ const FocusPage = ({ selectedDate, onBack }) => {
           )}
         </div>
       </div>
-      
+      <div className={`store-menu ${storeMenu ? 'active' : ''}`}>
+          <h1>
+            COLOR SELECT
+          </h1>
+          <div className='colors'>
+            <button className='col-sel-1' id='col1' onClick={() => handleColorChange('red')}>
+              
+            </button>
+            <button className='col-sel-2' id='col2' onClick={() => handleColorChange('orange')}>
+
+            </button>
+            <button className='col-sel-3' id='col3' onClick={() => handleColorChange('black')}>
+
+            </button>
+            <button className='col-sel-4' id='col4'  onClick={() => handleColorChange('blue')}>
+
+            </button>
+            <button className='col-sel-5' id='col5' onClick={() => handleColorChange('pink')}>
+
+            </button>
+            <button className='col-sel-6'id='col6' onClick={() => handleColorChange('purple')}>
+
+            </button>
+          </div>
+      </div>
       {/* Timer display always visible at the bottom */}
       <div className="timer-container">
         {currentTask ? (
@@ -225,10 +265,9 @@ const FocusPage = ({ selectedDate, onBack }) => {
           </div>
         )}
       </div>
-      /* fixing this v soon */
       <button 
         className="seed-button"
-        onClick={() => handleTaskComplete(currentTask.taskId, currentTask.subTaskId)}
+        onClick={() => changeMenu(!storeMenu)}
       >
         <img src="/seedbag.png">
         </img>

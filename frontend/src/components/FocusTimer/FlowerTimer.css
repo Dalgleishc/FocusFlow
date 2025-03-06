@@ -79,11 +79,15 @@
     height: 40px;
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
+
+:root {
+  --petal-color: #ce1fab;
+}
   
   .petal {
     width: 20px;
     height: 20px;
-    background-color: #f48fb1;
+    background-color: var(--petal-color);
     position: absolute;
     border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
   }
