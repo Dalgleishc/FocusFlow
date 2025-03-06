@@ -5,12 +5,11 @@ import ProductivityTab from '../components/Tabs/ProductivityTab';
 import LeaderboardTab from '../components/Tabs/LeaderboardTab';
 import FlowerTimer from '../components/FocusTimer/FlowerTimer';
 
-const FocusPage = ({ selectedDate, onBack }) => {
+const FocusPage = ({ selectedDate, onBack, tasks, setTasks }) => {
   const [activeTab, setActiveTab] = useState('scheduling');
   const [storeMenu, changeMenu] = useState(false);
   const[col, changeColor] = useState('#ce1fab')
   const [currentTask, setCurrentTask] = useState(null);
-  const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [isOnBreak, setIsOnBreak] = useState(false);
@@ -28,44 +27,44 @@ const FocusPage = ({ selectedDate, onBack }) => {
     // In a real app, this would be an API call
     const fetchUserTasks = async () => {
       // Simulated data - in a real app, you'd fetch from the backend
-      const mockTasks = [
-        { 
-          id: 1, 
-          title: 'Complete Math Assignment', 
-          type: 'Study',
-          duration: 90, // in minutes
-          subTasks: [] // Will be populated by the task splitter
-        },
-        { 
-          id: 2, 
-          title: 'Read Chapter 5 for Biology', 
-          type: 'Study',
-          duration: 60,
-          subTasks: []
-        },
-        { 
-          id: 3, 
-          title: 'Work on Project Presentation', 
-          type: 'Work',
-          duration: 120,
-          subTasks: []
-        }
-      ];
-
-      const changeColor = (col) => {
-        const petals = document.querySelectorAll(".petal");   
-        console.debug(col);
-        petals.forEach(petal => {
-          petal.style.backgroundColor = col;
-        });
-      };
+      
+      // let mockTasks = [
+      //   { 
+      //     id: 1, 
+      //     title: 'Complete Math Assignment', 
+      //     type: 'Study',
+      //     duration: 90, // in minutes
+      //     subTasks: [] // Will be populated by the task splitter
+      //   },
+      //   { 
+      //     id: 2, 
+      //     title: 'Read Chapter 5 for Biology', 
+      //     type: 'Study',
+      //     duration: 60,
+      //     subTasks: []
+      //   },
+      //   { 
+      //     id: 3, 
+      //     title: 'Work on Project Presentation', 
+      //     type: 'Work',
+      //     duration: 120,
+      //     subTasks: []
+      //   }
+      // ];
+      // mockTasks[3] = tasks[0];
       
       // Split tasks into 25-minute chunks (a simple implementation of the task splitter)
-      const processedTasks = mockTasks.map(task => {
+      const processedTasks = tasks.map(task => {
         const numSubTasks = Math.ceil(task.duration / 25); // TODO
         // To this for debugging:
         // const numSubTasks = Math.ceil(task.duration / 1); 
         const subTasks = [];
+
+        // only activate task if it's for today
+        const dateTest = task.date.getFullYear() === selectedDate.getFullYear() &&
+         task.date.getMonth() === selectedDate.getMonth() &&
+         task.date.getDate() === selectedDate.getDate();
+        dateTest ? task.active = true : task.active = false;
         
         for (let i = 0; i < numSubTasks; i++) {
           let subTaskDuration = 25;
@@ -96,7 +95,8 @@ const FocusPage = ({ selectedDate, onBack }) => {
     };
     
     fetchUserTasks();
-  }, [selectedDate]);
+  }, []);
+
   const handleTaskComplete = (taskId, subTaskId) => {
     // Mark subtask as completed
     setTasks(prevTasks => 
@@ -184,7 +184,7 @@ const FocusPage = ({ selectedDate, onBack }) => {
         <div className="tab-content">
           {activeTab === 'scheduling' && (
             <SchedulingTab 
-              tasks={tasks}
+              allTasks={tasks}
               completedTasks={completedTasks}
               onStartTask={startTask}
             />
@@ -192,7 +192,7 @@ const FocusPage = ({ selectedDate, onBack }) => {
           
           {activeTab === 'productivity' && (
             <ProductivityTab 
-              tasks={tasks}
+              allTasks={tasks}
               completedTasks={completedTasks}
               onStartTask={startTask}
             />
@@ -265,11 +265,12 @@ const FocusPage = ({ selectedDate, onBack }) => {
           </div>
         )}
       </div>
+      {/* fixing this soon */}
       <button 
         className="seed-button"
         onClick={() => changeMenu(!storeMenu)}
       >
-        <img src="/seedbag.png">
+        <img src="/seedbag.png" alt="seedbag">
         </img>
         <div className="petals" style={{ 
             transform: `scale(.25)`

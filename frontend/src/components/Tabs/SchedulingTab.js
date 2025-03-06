@@ -1,7 +1,10 @@
 import React from 'react';
 import './Tabs.css';
 
-const SchedulingTab = ({ tasks, completedTasks, onStartTask }) => {
+const SchedulingTab = ({ allTasks, completedTasks, onStartTask }) => {
+  // only want today's (active) tasks
+  const tasks = allTasks.filter((t) => {return t.active});
+
   return (
     <div className="scheduling-tab">
       <div className="focus-overview">

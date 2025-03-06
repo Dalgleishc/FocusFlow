@@ -6,6 +6,8 @@ import './App.css';
 function App() {
   const [page, setPage] = useState('calendar');
   const [selectedDate, setSelectedDate] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const [calendarTasks, setCalendarTasks] = useState({});
   
   const handleDaySelect = (date) => {
     setSelectedDate(date);
@@ -19,11 +21,13 @@ function App() {
   return (
     <div className="App">
       {page === 'calendar' ? (
-        <CalendarPage onDaySelect={handleDaySelect} />
+        <CalendarPage onDaySelect={handleDaySelect} tasks={tasks} setTasks={setTasks} calendarTasks={calendarTasks} setCalendarTasks={setCalendarTasks}/>
       ) : (
         <FocusPage 
           selectedDate={selectedDate} 
-          onBack={handleBackToCalendar} 
+          onBack={handleBackToCalendar}
+          tasks={tasks}
+          setTasks={setTasks} 
         />
       )}
     </div>
