@@ -194,3 +194,36 @@
       background-color: #f48fb1;
     }
   }
+  
+  .toggle-timer-button {
+    padding: 8px 16px;
+    margin-bottom: 15px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .toggle-timer-button:hover {
+    background-color: #5000d0;
+  }
+  
+  /* Add a smooth transition for the timer display */
+  .time-display {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

@@ -4,6 +4,7 @@ import './FlowerTimer.css';
 const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
   const [timeRemaining, setTimeRemaining] = useState(duration * 60); // Convert minutes to seconds
   const [progress, setProgress] = useState(0);
+  const [showTimer, setShowTimer] = useState(true); // Add state for timer visibility
   const timerRef = useRef(null);
   const totalTime = duration * 60; // Total duration in seconds
 
@@ -80,11 +81,27 @@ const FlowerTimer = ({ duration, isRunning, isBreak, onComplete }) => {
     }
   };
 
+  // Toggle timer visibility
+  const toggleTimer = () => {
+    setShowTimer(!showTimer);
+  };
+
   return (
     <div className="flower-timer">
-      <div className="time-display">
-        {formatTime(timeRemaining)}
-      </div>
+      {/* Only show the time display if showTimer is true */}
+      {showTimer && (
+        <div className="time-display">
+          {formatTime(timeRemaining)}
+        </div>
+      )}
+      
+      {/* Button to toggle timer visibility */}
+      <button 
+        className="toggle-timer-button"
+        onClick={toggleTimer}
+      >
+        {showTimer ? 'Hide Timer' : 'Show Timer'}
+      </button>
       
       <div className="flower-container">
         <div className={`flower ${getFlowerStage()} ${isBreak ? 'break-time' : ''}`}>
